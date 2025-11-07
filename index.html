@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subhash Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+    <section id="home">
+        <header>
+
+            <h2 class="name">KARRI SUBHASH</h2>
+
+
+            <a href="#home"><button class="button">Home</button></a>
+
+            <a href="#about"><button class="button">About</button></a>
+
+            <a href="#skills"><button class="button">Skills</button></a>
+            <a href="#education"><button class="button">Education</button></a>
+            <a href="#Projects"><button class="button">Projects</button>
+            </a><a href="#Contact"><button class="button">Achivements</button></a>
+
+
+
+
+        </header>
+
+
+        <!-- Hero Section -->
+        <section id="bg" class="hero">
+            <div class="hero-content">
+                <div>
+                    <h1 class="wel">Welcome To My Portfolio</h1>
+                </div><br>
+                <h1>Hi There,<br> I'm <span class="highlight">Karri Subhash</span></h1>
+                <h2>I Am Into <span id="typed"></span></h2>
+                <a href="#about" class="btn">About Me ↓</a>
+
+                <!-- Social Icons -->
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <!-- Profile Image -->
+            <div class="hero-img">
+                <img src="subhash1.jpg" alt="subhash">
+            </div>
+        </section>
+
+        <!-- Scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.net.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+        <script>
+            // Typed.js
+            var typed = new Typed("#typed", {
+                strings: ["Web Developer", "Python Programmer", "Django Enthusiast", "AI Explorer"],
+                typeSpeed: 60,
+                backSpeed: 40,
+                backDelay: 1000,
+                loop: true
+            });
+
+            // Vanta.js NET Background
+            VANTA.NET({
+                el: "#bg",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0x00ffff,
+                backgroundColor: 0x000000,
+                points: 20.00,
+                maxDistance: 15.00,
+                spacing: 12.00
+            });
+        </script>
+        <section id="about" class="about-section">
+            <h2 class="section-title"><i class="fas fa-user"></i> About <span>Me</span></h2>
+
+            <div class="about-container">
+                <!-- Left: Profile Image -->
+                <div class="about-img">
+                    <img src="animie.jpeg" alt="Subhash Profile">
+                </div>
+
+                <!-- Right: Text -->
+                <div class="about-text">
+                    <h3>I'm Subhash</h3>
+                    <h4>Tech & Software Enthusiast</h4>
+                    <p class="para">
+                        I am a tech and software enthusiast currently pursuing B.Tech in Mechanical Engineering.
+                        I am passionate about coding, exploring new technologies, and building innovative applications.
+                        I enjoy working on projects related to web development, Django, and AI.
+                        I also take part in personal projects to sharpen my skills.
+                    </p>
+
+                    <p><strong>Email:</strong> <a href="mailto:karrisubhash643@gmail.com">karrisubhash643@gmail.com</a>
+                    </p>
+                    <p><strong>Place:</strong> Andhra Pradesh, India</p>
+
+                    <a href="resume.pdf" class="resume-btn" target="_blank">Resume <i
+                            class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+        <section id="skills">
+            <h2><i class="fas fa-laptop-code"></i> Skills <span>& Abilities</span></h2>
+
+            <div class="skills-container">
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
+                    <p>HTML5</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
+                    <p>CSS3</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                        alt="JavaScript">
+                    <p>JavaScript</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                        alt="ReactJS">
+                    <p>ReactJS</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg"
+                        alt="TailwindCSS">
+                    <p>TailwindCSS</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
+                        alt="Bootstrap">
+                    <p>Bootstrap</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                    <p>Java</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                        alt="Python">
+                    <p>Python</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+                        alt="C++">
+                    <p>C++</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                        alt="MongoDB">
+                    <p>MongoDB</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+                    <p>MySQL</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                    <p>Git</p>
+                </div>
+            </div>
+        </section>
+        <section id="education">
+            <h2><i class="fas fa-graduation-cap"></i> My <span>Education</span></h2>
+            <p class="edu-quote">Education Is Not The Learning Of Facts, But The Training Of The Mind To Think.</p>
+
+            <div class="edu-container">
+                <!-- Card 1 -->
+                <div class="edu-card">
+                    <img src="anits.jpeg" alt="College">
+                    <div class="edu-info">
+                        <h3>B.Tech In Mechanical Engineering</h3>
+                        <p>Anil Neerukonda Institute of Technology and Sciences</p>
+                        <span class="edu-duration">2024-2028 | Pursuing</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="edu-card">
+                    <img src="sri chaitanya image.avif" alt="School" style="height: 130px;">
+                    <div class="edu-info">
+                        <h3>Intermediate Education</h3>
+                        <p>Board Of Intermediate Education, Andhra Pradesh (BIEAP)</p>
+                        <span class="edu-duration">2022-2024 | Completed</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <footer id="footer">
+            <div class="footer-container">
+
+                <!-- Left Section -->
+                <div class="footer-about">
+                    <h3>Subhash's Portfolio</h3>
+                    <p>
+                        Thank you for visiting my personal portfolio website. Connect with me over socials.
+
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">➤ Home</a></li>
+                        <li><a href="#about">➤ About</a></li>
+                        <li><a href="#skills">➤ Skills</a></li>
+                        <li><a href="#education">➤ Education</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-contact">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-phone"></i> +91 6301998030</p>
+                    <p><i class="fas fa-envelope"></i> karrisubhash643@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Andhra Pradesh, India</p>
+
+                    <!-- Social Icons -->
+                    <div class="social-icons">
+                        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="footer-bottom">
+                <p>Designed By Subhash</p>
+            </div>
+        </footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Zomato Clone — Food Munch</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background: #f8f8f8;
+        }
+
+        header {
+            background: #e23744;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+
+        header span {
+            cursor: pointer
+        }
+
+        #background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 12px auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.18s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px)
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-body h3 {
+            margin: 0 0 6px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .card-body p {
+            margin: 6px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #e23744;
+            margin-top: 6px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background: #e23744;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #b21f2d;
+        }
+
+        /* overlay */
+        #overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.32);
+            display: none;
+            z-index: 18;
+        }
+
+        #overlay.active {
+            display: block;
+        }
+
+        /* cart sidebar (single element) */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -380px;
+            width: 340px;
+            height: 100%;
+            background: #fff;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+            transition: right 0.28s ease;
+            z-index: 19;
+            padding: 16px;
+            overflow: auto;
+            border-left: 1px solid #f1f1f1;
+        }
+
+        .cart-modal.active {
+            right: 0;
+        }
+
+        .cart-modal h2 {
+            color: #e23744;
+            margin: 0 0 10px;
+            text-align: center;
+        }
+
+        .cart-items {
+            min-height: 80px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 6px;
+            border-bottom: 1px solid #f0f0f0;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .cart-item .meta {
+            font-size: 13px;
+            color: #444;
+        }
+
+        .cart-total {
+            font-weight: 700;
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .back-btn {
+            display: block;
+            background: #f3f4f6;
+            color: #111;
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin: 12px auto;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background: #eee;
+        }
+
+        /* checkout area (hidden by default) */
+        .checkout {
+            display: none;
+            padding: 20px;
+            max-width: 500px;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .checkout h2 {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .checkout label {
+            font-weight: 700;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .checkout input,
+        .checkout textarea,
+        .checkout select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .checkout-btn {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background: #e23744;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .checkout-btn:hover {
+            background: #b21f2d;
+        }
+
+        @media (max-width:520px) {
+            .menu {
+                gap: 12px;
+                padding: 12px;
+            }
+
+            .cart-modal {
+                width: 92vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="background"></div>
+
+    <header>
+        🍽️ Food Munch
+
+        <span id="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</span>
+    </header>
+
+    <!-- Menu Page -->
+    <div class="menu" id="menu"></div>
+
+    <!-- Overlay (click outside cart to close) -->
+    <div id="overlay" aria-hidden="true"></div>
+
+    <!-- Single Cart Sidebar -->
+    <aside class="cart-modal" id="cart" aria-hidden="true">
+        <h2>🛒 Your Cart</h2>
+        <div id="cart-items" class="cart-items"></div>
+        <div class="cart-total" id="cart-total">Total: ₹0</div>
+
+        <!-- Back to Menu button -->
+        <button id="back-to-menu" class="back-btn" type="button">⬅ Back to Menu</button>
+
+        <!-- Proceed to checkout (stays inside cart) -->
+        <button id="proceed-checkout" class="btn" style="display:block;width:100%;margin-top:10px">Proceed to
+            Checkout</button>
+    </aside>
+
+    <!-- Checkout Page -->
+    <div class="checkout" id="checkout">
+        <h2>Checkout</h2>
+        <form id="checkout-form">
+            <label>Name</label>
+            <input type="text" name="name" required>
+
+            <label>Address</label>
+            <textarea name="address" required></textarea>
+
+            <label>Contact Number</label>
+            <input type="tel" name="contact">
+
+            <label>Payment Method</label>
+            <select name="payment" required>
+                <option value="COD">Cash on Delivery</option>
+                <option value="Card">Credit/Debit Card</option>
+                <option value="UPI">UPI</option>
+            </select>
+
+            <button type="submit" class="checkout-btn">Place Order</button>
+        </form>
+    </div>
+
+    <!-- scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.net.min.js"></script>
+
+    <script>
+        // Initialize Vanta background (safe-guard if script loads)
+
+
+        // Food items (your list)
+        const foodItems = [
+            { name: "Margherita Pizza", desc: "Classic delight with mozzarella cheese", price: 299, img: "https://source.unsplash.com/400x300/?pizza" },
+            { name: "Veg Burger", desc: "Crispy veg patty with lettuce & mayo", price: 149, img: "https://media.istockphoto.com/id/2185584048/photo/close-up-on-a-burger-while-people-eat-at-a-fast-food-restaurant.webp?a=1&b=1&s=612x612&w=0&k=20&c=SerHTElfOTtzWX4migolhwKgRowFtELWk8ZgJAe3A50=" },
+            { name: "Paneer Butter Masala", desc: "Soft paneer in creamy gravy", price: 249, img: "https://source.unsplash.com/400x300/?paneer" },
+            { name: "Chicken Biryani", desc: "Aromatic basmati rice with chicken", price: 349, img: "https://source.unsplash.com/400x300/?biryani" },
+            { name: "Gulab Jamun", desc: "Juicy sweet balls in sugar syrup", price: 99, img: "https://source.unsplash.com/400x300/?gulabjamun" },
+            { name: "Butter Naan", desc: "Soft and fluffy naan topped with butter", price: 79, img: "https://source.unsplash.com/400x300/?naan" },
+            { name: "Cold Coffee", desc: "Refreshing chilled coffee with whipped cream", price: 129, img: "https://source.unsplash.com/400x300/?coffee" },
+            { name: "Ice Cream Sundae", desc: "Delicious ice cream topped with syrup and nuts", price: 159, img: "" }
+        ];
+
+        // DOM refs
+        const menuDiv = document.getElementById('menu');
+        const cartBtn = document.getElementById('cart-btn');
+        const cartEl = document.getElementById('cart');
+        const overlayEl = document.getElementById('overlay');
+        const cartItemsDiv = document.getElementById('cart-items');
+        const cartCountEl = document.getElementById('cart-count');
+        const cartTotalEl = document.getElementById('cart-total');
+        const backToMenuBtn = document.getElementById('back-to-menu');
+        const proceedCheckoutBtn = document.getElementById('proceed-checkout');
+        const checkoutPage = document.getElementById('checkout');
+        const checkoutForm = document.getElementById('checkout-form');
+
+        // simple cart array (each entry is an item)
+        let cart = [];
+
+        // Build menu cards and attach event via delegation
+        function buildMenu() {
+            menuDiv.innerHTML = '';
+            foodItems.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+          <img src="${item.img}" alt="${item.name}" loading="lazy">
+          <div class="card-body">
+            <h3>${item.name}</h3>
+            <p>${item.desc}</p>
+            <div class="price">₹${item.price}</div>
+            <button class="btn add-btn" data-index="${idx}" type="button">Add to Cart</button>
+          </div>
+        `;
+                menuDiv.appendChild(card);
+            });
+
+            // Delegated click listener for add buttons
+            menuDiv.addEventListener('click', (ev) => {
+                const btn = ev.target.closest('.add-btn');
+                if (!btn) return;
+                const index = Number(btn.dataset.index);
+                addToCart(index);
+            });
+        }
+
+        // Add item and open cart
+        function addToCart(index) {
+            cart.push(foodItems[index]);
+            renderCart();
+            toggleCart(true); // open cart after adding
+        }
+
+        // Render cart contents
+        function renderCart() {
+            cartItemsDiv.innerHTML = '';
+            let total = 0;
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p style="text-align:center;color:#666">Cart is empty</p>';
+            } else {
+                cart.forEach((it, i) => {
+                    const div = document.createElement('div');
+                    div.className = 'cart-item';
+                    div.innerHTML = `
+            <div class="meta">
+              <div style="font-weight:600">${it.name}</div>
+              <div style="font-size:13px;color:#666">₹${it.price}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+              <button data-remove="${i}" class="btn" style="background:#fff;color:#e23744;border:1px solid #e9aeb0;padding:6px 8px;border-radius:6px">Remove</button>
+            </div>
+          `;
+                    cartItemsDiv.appendChild(div);
+                    total += it.price;
+                });
+            }
+
+            cartTotalEl.textContent = `Total: ₹${total}`;
+            cartCountEl.textContent = cart.length;
+
+            // wire remove buttons (delegated)
+            cartItemsDiv.querySelectorAll('[data-remove]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = Number(btn.getAttribute('data-remove'));
+                    cart.splice(idx, 1);
+                    renderCart();
+                });
+            });
+        }
+
+        // Toggle cart (forceOpen true/false or toggle)
+        function toggleCart(forceOpen) {
+            if (forceOpen === true) {
+                cartEl.classList.add('active');
+                overlayEl.classList.add('active');
+                cartEl.setAttribute('aria-hidden', 'false');
+            } else if (forceOpen === false) {
+                cartEl.classList.remove('active');
+                overlayEl.classList.remove('active');
+                cartEl.setAttribute('aria-hidden', 'true');
+            } else {
+                cartEl.classList.toggle('active');
+                overlayEl.classList.toggle('active');
+                const open = cartEl.classList.contains('active');
+                cartEl.setAttribute('aria-hidden', String(!open));
+            }
+        }
+
+        // Wire UI controls
+        cartBtn.addEventListener('click', () => toggleCart(true));
+        backToMenuBtn.addEventListener('click', () => toggleCart(false));
+        overlayEl.addEventListener('click', () => toggleCart(false));
+
+        proceedCheckoutBtn.addEventListener('click', () => {
+            // hide cart + overlay, show checkout section
+            toggleCart(false);
+            document.querySelector('.menu').style.display = 'none';
+            checkoutPage.style.display = 'block';
+        });
+
+        // Checkout form submit
+        checkoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Here you can capture form values if needed
+            alert('✅ Order Placed Successfully! 🎉');
+            // reset
+            cart = [];
+            renderCart();
+            checkoutForm.reset();
+            checkoutPage.style.display = 'none';
+            document.querySelector('.menu').style.display = '';
+            // optionally close background animation or show order summary
+        });
+
+        // initial render
+        buildMenu();
+        renderCart();
+
+        // expose for debugging if needed
+        window.app = { toggleCart, addToCart, renderCart, cart };
+    </script>
+</body>
+
+</html>
