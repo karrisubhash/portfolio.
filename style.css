@@ -1,4 +1,4 @@
-/* ---------------------- GLOBAL STYLES ---------------------- */
+/* -------------------- GLOBAL -------------------- */
 * {
   margin: 0;
   padding: 0;
@@ -8,65 +8,69 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  background: #fff;
   color: #222;
-  background-color: #fff;
   overflow-x: hidden;
 }
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 h1, h2, h3, h4 {
   font-weight: 600;
 }
 
-/* ---------------------- HEADER ---------------------- */
+/* -------------------- HEADER -------------------- */
 header {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 60px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
   z-index: 1000;
+  padding: 0 15px;
 }
 
-header h2 {
+header h2.name {
   margin-right: auto;
-  margin-left: 20px;
   font-weight: 700;
-  color: #333;
+  font-size: 20px;
+  color: #111;
 }
 
 header .button {
-  background: none;
   border: none;
+  background: none;
   font-size: 16px;
-  margin: 0 10px;
-  cursor: pointer;
   font-weight: 600;
-  color: #333;
-  transition: color 0.3s ease;
+  color: #222;
+  cursor: pointer;
+  transition: color 0.3s;
 }
 
 header .button:hover {
   color: #007bff;
 }
 
-/* ---------------------- HERO SECTION ---------------------- */
+/* -------------------- HERO SECTION -------------------- */
 .hero {
-  height: 100vh;
+  position: relative;
   width: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding: 0 10%;
   color: white;
-  position: relative;
   overflow: hidden;
 }
 
@@ -76,10 +80,10 @@ header .button:hover {
 }
 
 .hero-content .wel {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 10px;
+  font-size: 22px;
   color: #00ffff;
+  font-weight: 600;
+  margin-bottom: 15px;
 }
 
 .hero-content h1 {
@@ -94,18 +98,16 @@ header .button:hover {
 
 .highlight {
   color: orange;
-  font-weight: bold;
 }
 
 .btn {
   display: inline-block;
-  padding: 12px 25px;
+  padding: 12px 24px;
   background: #3b82f6;
   color: white;
   border-radius: 30px;
   font-weight: bold;
-  text-decoration: none;
-  transition: 0.3s;
+  transition: background 0.3s;
 }
 
 .btn:hover {
@@ -113,7 +115,7 @@ header .button:hover {
 }
 
 .social-icons {
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .social-icons a {
@@ -131,13 +133,13 @@ header .button:hover {
   width: 320px;
   height: 320px;
   border-radius: 50%;
-  border: 4px solid white;
   object-fit: cover;
+  border: 4px solid white;
   box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
   z-index: 1;
 }
 
-/* Responsive Hero */
+/* -------------------- RESPONSIVE HERO -------------------- */
 @media (max-width: 992px) {
   .hero {
     flex-direction: column;
@@ -146,22 +148,26 @@ header .button:hover {
     height: auto;
   }
 
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-content h2 {
+    font-size: 1.2rem;
+  }
+
   .hero-img img {
     width: 220px;
     height: 220px;
     margin-top: 20px;
   }
 
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-
-  .hero-content h2 {
-    font-size: 1.2rem;
+  .social-icons a {
+    font-size: 20px;
   }
 }
 
-/* ---------------------- ABOUT SECTION ---------------------- */
+/* -------------------- ABOUT SECTION -------------------- */
 .about-section {
   padding: 100px 10%;
   background: #fff;
@@ -182,18 +188,19 @@ header .button:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 40px;
   flex-wrap: wrap;
+  gap: 40px;
 }
 
 .about-img img {
-  width: 300px;
+  width: 320px;
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .about-text {
   flex: 1;
+  min-width: 250px;
 }
 
 .about-text h3 {
@@ -215,8 +222,7 @@ header .button:hover {
   padding: 12px 25px;
   background: #3b82f6;
   color: white;
-  border-radius: 10px;
-  text-decoration: none;
+  border-radius: 8px;
   transition: 0.3s;
 }
 
@@ -232,12 +238,12 @@ header .button:hover {
   }
 
   .about-img img {
-    width: 220px;
+    width: 250px;
     margin-bottom: 20px;
   }
 }
 
-/* ---------------------- SKILLS SECTION ---------------------- */
+/* -------------------- SKILLS SECTION -------------------- */
 #skills {
   text-align: center;
   padding: 80px 20px;
@@ -250,8 +256,8 @@ header .button:hover {
   font-weight: bold;
 }
 
-#skills h2 span {
-  color: #ff9800;
+#skills span {
+  color: orange;
 }
 
 .skills-container {
@@ -267,7 +273,7 @@ header .button:hover {
   color: #fff;
   padding: 25px;
   border-radius: 12px;
-  transition: 0.3s ease;
+  transition: 0.3s;
 }
 
 .skill-card:hover {
@@ -281,12 +287,7 @@ header .button:hover {
   margin-bottom: 10px;
 }
 
-.skill-card p {
-  margin: 0;
-  font-weight: 500;
-}
-
-/* ---------------------- EDUCATION SECTION ---------------------- */
+/* -------------------- EDUCATION -------------------- */
 #education {
   text-align: center;
   padding: 80px 20px;
@@ -296,7 +297,6 @@ header .button:hover {
 #education h2 {
   font-size: 2rem;
   margin-bottom: 10px;
-  font-weight: bold;
 }
 
 #education span {
@@ -342,7 +342,6 @@ header .button:hover {
 
 .edu-info h3 {
   color: #002060;
-  margin-bottom: 10px;
 }
 
 .edu-duration {
@@ -354,7 +353,6 @@ header .button:hover {
 @media (max-width: 768px) {
   .edu-card {
     flex-direction: column;
-    align-items: center;
     text-align: center;
   }
 
@@ -363,7 +361,7 @@ header .button:hover {
   }
 }
 
-/* ---------------------- FOOTER ---------------------- */
+/* -------------------- FOOTER -------------------- */
 #footer {
   background: #0a043c;
   color: white;
@@ -386,16 +384,8 @@ header .button:hover {
   min-width: 250px;
 }
 
-.footer-about h3,
-.footer-links h3,
-.footer-contact h3 {
-  font-size: 18px;
-  margin-bottom: 15px;
-}
-
 .footer-links ul {
   list-style: none;
-  padding: 0;
 }
 
 .footer-links ul li {
@@ -403,7 +393,7 @@ header .button:hover {
 }
 
 .footer-links ul li a {
-  color: #ddd;
+  color: #ccc;
   transition: color 0.3s;
 }
 
@@ -419,10 +409,6 @@ header .button:hover {
 .footer-contact i {
   margin-right: 8px;
   color: #ff9800;
-}
-
-.footer-contact .social-icons {
-  margin-top: 10px;
 }
 
 .footer-contact .social-icons a {
@@ -449,7 +435,38 @@ header .button:hover {
   color: #ccc;
 }
 
-/* ---------------------- SCROLL SMOOTHNESS ---------------------- */
-html {
-  scroll-behavior: smooth;
+/* -------------------- RESPONSIVE HEADER -------------------- */
+@media (max-width: 768px) {
+  header {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    height: auto;
+    padding: 10px;
+  }
+
+  header .name {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  header .button {
+    font-size: 14px;
+  }
+}
+
+/* -------------------- VANTA BACKGROUND FIX -------------------- */
+#bg {
+  position: relative;
+}
+#bg canvas {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+.hero-content, .hero-img {
+  position: relative;
+  z-index: 2;
 }
